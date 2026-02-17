@@ -3,271 +3,197 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hub de Scripts — Instalação e Downloads</title>
+  <title>Hub de Scripts</title>
   <style>
     :root{
-      --bg:#0f172a;          /* navy */
-      --card:#111c33;
-      --card2:#0b1326;
-      --text:#e5e7eb;
-      --muted:#a8b1c7;
-      --accent:#ff9900;      /* “amazon-like” orange */
-      --accent2:#f59e0b;
-      --ok:#22c55e;
-      --warn:#f97316;
-      --bad:#ef4444;
-      --border:rgba(255,255,255,.12);
-      --shadow: 0 18px 40px rgba(0,0,0,.35);
-      --radius: 18px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --bg1:#0b1220;
+      --bg2:#0a0f1a;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.03);
+      --border:rgba(255,255,255,.10);
+      --text:#e9eef7;
+      --muted:rgba(233,238,247,.70);
+      --brand:#ff9900;
+      --brand2:#ffb84d;
+      --ok:#26d07c;
+      --shadow:0 18px 60px rgba(0,0,0,.45);
+      --radius:18px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:var(--sans);
+      font-family:var(--font);
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(255,153,0,.22), transparent 60%),
-        radial-gradient(1000px 500px at 90% 0%, rgba(99,102,241,.25), transparent 55%),
-        linear-gradient(180deg, #0b1020, #070a14 60%, #060713);
+        radial-gradient(900px 500px at 20% 10%, rgba(255,153,0,.20), transparent 55%),
+        radial-gradient(700px 480px at 80% 20%, rgba(255,184,77,.16), transparent 55%),
+        radial-gradient(900px 700px at 50% 110%, rgba(90,120,255,.12), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
       min-height:100vh;
     }
     a{color:inherit}
-    .container{max-width:1180px;margin:0 auto;padding:24px}
+    .wrap{max-width:1180px;margin:0 auto;padding:22px 16px 46px}
     .topbar{
-      display:flex;gap:14px;align-items:center;justify-content:space-between;
-      padding:14px 16px;border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius:16px; box-shadow: var(--shadow);
-      position:sticky; top:14px; backdrop-filter: blur(10px); z-index:10;
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;border:1px solid var(--border);border-radius:16px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      box-shadow:var(--shadow);
+      position:sticky;top:12px;z-index:20;
+      backdrop-filter: blur(10px);
     }
-    .brand{display:flex;gap:12px;align-items:center}
+    .brand{
+      display:flex;align-items:center;gap:10px;min-width:0;
+    }
     .logo{
-      width:40px;height:40px;border-radius:12px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,153,0,.9), rgba(255,153,0,.15)),
-                  linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.04));
-      border:1px solid var(--border);
-      display:grid;place-items:center;
-      font-weight:900;color:#111827;
+      width:38px;height:38px;border-radius:14px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,153,0,.95), transparent 55%),
+                  radial-gradient(circle at 70% 70%, rgba(255,184,77,.85), transparent 60%),
+                  rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      display:flex;align-items:center;justify-content:center;
+      flex:0 0 auto;
     }
-    .brand h1{font-size:14px;margin:0;letter-spacing:.2px}
-    .brand p{font-size:12px;margin:0;color:var(--muted)}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .logo b{color:#111;font-weight:1000;background:var(--brand);padding:2px 7px;border-radius:10px}
+    .title{display:flex;flex-direction:column;min-width:0}
+    .title .h{font-weight:950;letter-spacing:.2px}
+    .title .s{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .nav{display:flex;gap:10px;flex-wrap:wrap}
     .nav a{
-      text-decoration:none;font-size:12px;color:var(--muted);
-      padding:8px 10px;border-radius:12px;border:1px solid transparent;
-    }
-    .nav a:hover{border-color:var(--border); color:var(--text); background:rgba(255,255,255,.04)}
-    .hero{
-      margin-top:18px;
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: var(--shadow);
-      padding:26px;
-      overflow:hidden;
-      position:relative;
-    }
-    .hero:after{
-      content:"";
-      position:absolute; inset:-1px;
-      background: radial-gradient(900px 220px at 20% 20%, rgba(255,153,0,.18), transparent 60%),
-                  radial-gradient(700px 220px at 80% 10%, rgba(99,102,241,.18), transparent 60%);
-      pointer-events:none;
-    }
-    .hero-inner{position:relative;display:grid;grid-template-columns: 1.2fr .8fr;gap:18px;align-items:center}
-    @media (max-width:900px){.hero-inner{grid-template-columns:1fr}}
-    .kicker{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:8px 10px;border:1px solid var(--border);
-      border-radius:999px;color:var(--muted);font-size:12px;
-      background:rgba(0,0,0,.2);
-    }
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(255,153,0,.14)}
-    .hero h2{margin:12px 0 8px;font-size:30px;line-height:1.15}
-    .hero p{margin:0;color:var(--muted);max-width:70ch}
-    .cta-row{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
-    .btn{
-      cursor:pointer;
-      border:none; border-radius:14px;
-      padding:10px 12px;
-      font-weight:700; font-size:13px;
-      display:inline-flex; align-items:center; gap:8px;
-      transition:.15s transform,.15s opacity,.15s background;
       text-decoration:none;
-      user-select:none;
+      padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      font-size:12px;font-weight:800;color:var(--text);
     }
-    .btn:active{transform: translateY(1px)}
-    .btn-primary{
-      background:linear-gradient(180deg, var(--accent), var(--accent2));
-      color:#111827;
-      box-shadow:0 12px 24px rgba(255,153,0,.18);
+    .hero{
+      margin-top:16px;
+      display:grid;grid-template-columns: 1.35fr .85fr;gap:14px;
     }
-    .btn-ghost{
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      border:1px solid var(--border);
-    }
+    @media (max-width: 980px){ .hero{grid-template-columns:1fr} .topbar{position:static} }
     .panel{
       border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(17,28,51,.8), rgba(7,10,20,.65));
-      border-radius:16px;
-      padding:14px;
-    }
-    .panel h3{margin:0 0 10px;font-size:13px;color:var(--muted);font-weight:700}
-    .steps{display:grid;gap:10px}
-    .step{
-      display:grid; grid-template-columns: 28px 1fr;
-      gap:10px; align-items:flex-start;
-      padding:10px; border-radius:14px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(0,0,0,.16);
+      background:linear-gradient(180deg, var(--card), var(--card2));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      backdrop-filter: blur(10px);
     }
     .badge{
-      width:28px;height:28px;border-radius:10px;display:grid;place-items:center;
-      background:rgba(255,153,0,.15);
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 10px;border-radius:999px;
       border:1px solid rgba(255,153,0,.25);
-      color:var(--accent);
-      font-weight:900;
-      font-family:var(--mono);
-      font-size:12px;
+      background:rgba(255,153,0,.10);
+      font-weight:900;font-size:12px;color:var(--brand2);
+      width:max-content;
     }
-    .step strong{display:block;font-size:13px}
-    .step span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
-
-    .section{margin-top:18px}
-    .section h2{font-size:16px;margin:0 0 10px;color:var(--text)}
-    .section p{margin:0 0 10px;color:var(--muted);font-size:13px}
-
-    .toolbar{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
-      margin-bottom:10px;
-    }
-    .search{
-      flex: 1 1 280px;
-      display:flex;align-items:center;gap:10px;
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-    }
-    .search input{
-      width:100%;
-      background:transparent;border:none;outline:none;color:var(--text);
-      font-size:13px;
-    }
-    .pillrow{display:flex;gap:8px;flex-wrap:wrap}
-    .pill{
-      border:1px solid var(--border);
-      background:rgba(0,0,0,.18);
-      color:var(--muted);
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      cursor:pointer;
+    .hero h1{margin:10px 0 8px;font-size:34px;line-height:1.08;letter-spacing:-.3px}
+    .hero p{margin:0;color:var(--muted);max-width:64ch}
+    .cta{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      border:0;cursor:pointer;text-decoration:none;
+      padding:10px 14px;border-radius:14px;
+      font-weight:950;font-size:13px;
+      display:inline-flex;align-items:center;gap:10px;
       user-select:none;
     }
-    .pill.active{color:var(--text); border-color: rgba(255,153,0,.35); background: rgba(255,153,0,.12)}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:12px;
+    .btn.primary{
+      background:linear-gradient(135deg, rgba(255,153,0,.96), rgba(255,184,77,.96));
+      color:#111; box-shadow:0 14px 30px rgba(255,153,0,.18);
     }
-    @media (max-width:980px){.grid{grid-template-columns:1fr 1fr}}
-    @media (max-width:640px){.grid{grid-template-columns:1fr}}
-    .card{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(17,28,51,.75), rgba(7,10,20,.55));
-      border-radius:var(--radius);
-      padding:14px;
-      box-shadow: 0 10px 26px rgba(0,0,0,.25);
-      display:flex; flex-direction:column; gap:10px;
-      min-height: 220px;
-    }
-    .cardhead{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-    .title{font-weight:900;font-size:14px;margin:0}
-    .tag{
-      font-size:11px;
-      padding:6px 8px;
-      border-radius:999px;
+    .btn.ghost{
+      background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.12);
-      color:var(--muted);
-      white-space:nowrap;
+      color:var(--text);
     }
-    .desc{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
-    .meta{display:flex;gap:8px;flex-wrap:wrap}
-    .meta span{
-      font-size:11px;color:var(--muted);
+    .steps .step{
+      display:flex;gap:12px;padding:12px;border-radius:16px;
       border:1px solid rgba(255,255,255,.10);
-      background:rgba(0,0,0,.18);
-      padding:6px 8px;border-radius:999px;
-      font-family:var(--mono);
-    }
-    .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
-    .small{font-size:12px;padding:9px 10px;border-radius:12px}
-    .link{color:var(--accent);text-decoration:none}
-    .link:hover{text-decoration:underline}
-    .hr{height:1px;background:rgba(255,255,255,.08);margin:10px 0}
-
-    .media-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:12px;
-    }
-    @media (max-width:900px){.media-grid{grid-template-columns:1fr}}
-    .media{
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(17,28,51,.7), rgba(7,10,20,.55));
-      border-radius:var(--radius);
-      padding:14px;
-      box-shadow: 0 10px 26px rgba(0,0,0,.22);
-    }
-    .media h3{margin:0 0 8px;font-size:14px}
-    .media .frame{
-      border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.2);
-      aspect-ratio: 16 / 9;
-      width:100%;
-    }
-    .media iframe,.media img{width:100%;height:100%;display:block}
-    .media .caption{margin-top:10px;color:var(--muted);font-size:12px}
-
-    details{
-      border:1px solid var(--border);
       background:rgba(255,255,255,.04);
-      border-radius:16px;
-      padding:12px 14px;
+      margin-top:10px;
     }
-    details summary{cursor:pointer;font-weight:800}
-    details p{margin:10px 0 0;color:var(--muted);font-size:13px}
-
-    .footer{
-      margin:22px 0 8px;
-      color:var(--muted);
-      font-size:12px;
-      display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    .n{
+      width:30px;height:30px;border-radius:12px;flex:0 0 auto;
+      background:rgba(255,153,0,.16);border:1px solid rgba(255,153,0,.25);
+      display:flex;align-items:center;justify-content:center;font-weight:950;color:var(--brand2);
     }
-    .note{
-      font-size:12px;
-      color:rgba(229,231,235,.82);
-      border-left:3px solid rgba(255,153,0,.6);
-      padding:10px 12px;
-      background:rgba(255,153,0,.08);
-      border-radius:14px;
+    .step b{display:block}
+    .step span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .bar{
+      margin-top:16px;
+      display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+      padding:10px 12px;border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
     }
-    .mono{font-family:var(--mono)}
+    .search{
+      flex:1;min-width:240px;
+      display:flex;gap:10px;align-items:center;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.20);
+      padding:10px 12px;border-radius:14px;
+    }
+    .search input{
+      width:100%;border:0;outline:0;background:transparent;
+      color:var(--text);font-size:13px;
+    }
+    .chip{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(255,153,0,.18);
+      background:rgba(255,153,0,.10);
+      color:var(--brand2);
+      font-size:12px;font-weight:900;cursor:pointer;
+      user-select:none;
+    }
+    .chip.off{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.10);color:var(--text)}
+    .grid{
+      margin-top:14px;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+    .card{
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:18px;
+      padding:14px;
+      box-shadow:0 14px 40px rgba(0,0,0,.30);
+      display:flex;flex-direction:column;gap:10px;
+      min-height: 210px;
+    }
+    .k{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .k .name{font-weight:950}
+    .tag{font-size:11px;font-weight:950;color:var(--muted);border:1px solid rgba(255,255,255,.10);
+      padding:4px 8px;border-radius:999px;background:rgba(0,0,0,.18)}
+    .desc{color:var(--muted);font-size:12px;line-height:1.35}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+    .pill{padding:4px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.04)}
+    .actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+    .dl{
+      text-decoration:none;
+      background:linear-gradient(135deg, rgba(255,153,0,.95), rgba(255,184,77,.95));
+      color:#111;border-radius:12px;padding:9px 10px;font-weight:950;font-size:12px;border:0;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    .demo{
+      text-decoration:none;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--text);
+      border-radius:12px;padding:9px 10px;font-weight:900;font-size:12px;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    footer{margin-top:18px;color:var(--muted);font-size:12px;text-align:center;opacity:.9}
+    .hide{display:none !important}
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrap">
 
     <div class="topbar">
       <div class="brand">
-        <div class="logo">S</div>
-        <div>
-          <h1>Hub de Scripts</h1>
-          <p>Instalação • Downloads • Guias • Demos</p>
+        <div class="logo"><b>S</b></div>
+        <div class="title">
+          <div class="h">Hub de Scripts</div>
+          <div class="s">Instalação • Downloads • Guias • Demos</div>
         </div>
       </div>
       <div class="nav">
@@ -278,309 +204,269 @@
       </div>
     </div>
 
-    <div class="hero">
-      <div class="hero-inner">
-        <div>
-          <div class="kicker"><span class="dot"></span> Padronize o uso nos turnos • Instalação em 2 minutos</div>
-          <h2>Seu portal interno para extensões, scripts e treinamento</h2>
-          <p>
-            Aqui você publica tudo que o time precisa para usar seus scripts: links das extensões, downloads (arquivos .user.js),
-            prints e vídeos mostrando como funciona. Ideal para aumentar adoção e reduzir dúvidas no turno.
-          </p>
-
-          <div class="cta-row">
-            <a class="btn btn-primary" href="#scripts">Ver scripts</a>
-            <a class="btn btn-ghost" href="#instalacao">Como instalar</a>
-          </div>
-
-          <div class="hr"></div>
-          <div class="note">
-            <b>Dica:</b> se o uso for interno, hospede em local permitido pela empresa (intranet/S3 interno/wiki).
-            Evite expor links internos em site público.
-          </div>
+    <section class="hero" id="instalacao">
+      <div class="panel">
+        <div class="badge">● Padronize o uso nos turnos • Instalação em 2 minutos</div>
+        <h1>Seu portal interno para extensões, scripts e treinamento</h1>
+        <p>Aqui você publica tudo que o time precisa pra usar seus scripts: links das extensões, downloads (.user.js), prints e vídeos mostrando como funciona.</p>
+        <div class="cta">
+          <a class="btn primary" href="#scripts">Ver scripts</a>
+          <a class="btn ghost" href="#faq">Como instalar</a>
         </div>
+        <p style="margin-top:10px;font-size:12px;color:var(--muted)">
+          Dica: se for uso interno, hospede em local permitido pela empresa. Evite expor links internos em site público.
+        </p>
+      </div>
 
-        <div class="panel" id="instalacao">
-          <h3>Instalação rápida (recomendado)</h3>
-          <div class="steps">
-            <div class="step">
-              <div class="badge">1</div>
-              <div>
-                <strong>Instale a extensão base</strong>
-                <span>Ex.: Tampermonkey (Chrome/Firefox/Edge) e quaisquer dependências.</span>
-              </div>
-            </div>
-            <div class="step">
-              <div class="badge">2</div>
-              <div>
-                <strong>Baixe os scripts necessários</strong>
-                <span>Baixe os arquivos <span class="mono">.user.js</span> na seção “Scripts”.</span>
-              </div>
-            </div>
-            <div class="step">
-              <div class="badge">3</div>
-              <div>
-                <strong>Importe e ative</strong>
-                <span>Abra o arquivo e confirme “Install”. Verifique se está “Enabled”.</span>
-              </div>
-            </div>
-            <div class="step">
-              <div class="badge">4</div>
-              <div>
-                <strong>Teste com um exemplo</strong>
-                <span>Use o botão “Demos” para ver prints/vídeos e validar.</span>
-              </div>
-            </div>
+      <div class="panel steps">
+        <div style="font-weight:950;margin-bottom:6px">Instalação rápida (recomendado)</div>
+
+        <div class="step">
+          <div class="n">1</div>
+          <div>
+            <b>Instale a extensão base</b>
+            <span>Ex.: Tampermonkey (Chrome/Firefox/Edge) e quaisquer dependências.</span>
           </div>
         </div>
 
-      </div>
-    </div>
-
-    <!-- SCRIPTS -->
-    <div class="section" id="scripts">
-      <div class="toolbar">
-        <div class="search">
-          <span style="color:var(--muted);font-size:12px;">🔎</span>
-          <input id="search" placeholder="Buscar por nome, tag, área… (ex: PPA, PPR, Atlas)" />
+        <div class="step">
+          <div class="n">2</div>
+          <div>
+            <b>Baixe os scripts necessários</b>
+            <span>Baixe os arquivos .user.js na seção “Scripts”.</span>
+          </div>
         </div>
-        <div class="pillrow" id="filters"></div>
+
+        <div class="step">
+          <div class="n">3</div>
+          <div>
+            <b>Importe e ative</b>
+            <span>Abra o arquivo e confirme “Install”. Verifique se está “Enabled”.</span>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="n">4</div>
+          <div>
+            <b>Teste com um exemplo</b>
+            <span>Use a seção “Demos” para prints/vídeos e validar.</span>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <div class="grid" id="grid"></div>
-    </div>
-
-    <!-- DEMOS -->
-    <div class="section" id="demos">
-      <h2>Demos (imagens e vídeos)</h2>
-      <p>Coloque aqui vídeos curtos (YouTube interno/drive permitido) e prints explicando o passo a passo.</p>
-
-      <div class="media-grid" id="mediaGrid"></div>
-    </div>
-
-    <!-- FAQ -->
-    <div class="section" id="faq">
-      <h2>FAQ</h2>
-      <div style="display:grid;gap:10px;">
-        <details>
-          <summary>O script não apareceu. O que eu checo primeiro?</summary>
-          <p>
-            1) Se a extensão está habilitada. 2) Se o script está “Enabled”. 3) Se o site está no <span class="mono">@match</span>.
-            4) Se você está no navegador certo (Chrome/Firefox) e logado.
-          </p>
-        </details>
-        <details>
-          <summary>Como atualizo para a versão mais nova?</summary>
-          <p>
-            Baixe a versão nova do script e reinstale por cima, ou use o botão “Update” na extensão (se você publicar um link de update).
-          </p>
-        </details>
-        <details>
-          <summary>Posso ter conflitos entre scripts?</summary>
-          <p>
-            Pode. Evite scripts duplicados para a mesma página. Se der problema, desabilite um por vez e teste.
-          </p>
-        </details>
+    <div class="bar" id="scripts">
+      <div class="search">
+        <span style="opacity:.85">🔎</span>
+        <input id="q" placeholder="Buscar por nome, tag, área... (ex: PPA, PPR, Atlas)" />
+      </div>
+      <div id="chips">
+        <span class="chip" data-tag="ALL">Todos</span>
+        <span class="chip off" data-tag="PPA">PPA</span>
+        <span class="chip off" data-tag="FCLM">FCLM</span>
+        <span class="chip off" data-tag="PPR">PPR</span>
+        <span class="chip off" data-tag="ATLAS">ATLAS</span>
+        <span class="chip off" data-tag="BMI">BMI</span>
       </div>
     </div>
 
-    <div class="footer">
-      <div>© Hub de Scripts — interno (modelo)</div>
-      <div>Versão do site: <span class="mono">1.0</span></div>
+    <div class="grid" id="cards">
+
+      <!-- PPA -->
+      <div class="card" data-tags="PPA,FCLM">
+        <div class="k">
+          <div class="name">PPA — Último BIN / Último STOW</div>
+          <div class="tag">PPA</div>
+        </div>
+        <div class="desc">Mostra o último endereço (dst/bin) e hora do último evento do AA, com painel fixo e botão copiar/atualizar.</div>
+        <div class="meta">
+          <span class="pill">fclm-portal.amazon.com</span>
+          <span class="pill">Tampermonkey</span>
+        </div>
+        <div class="actions">
+          <a class="dl" href="scripts/fclm-timedetails-ultimo-stow.user.js" download>⬇ Baixar .user.js</a>
+          <a class="demo" href="#demos">🎞 Ver demo</a>
+        </div>
+      </div>
+
+      <div class="card" data-tags="PPA,FCLM">
+        <div class="k">
+          <div class="name">PPA — Activity Details: pegar última página/última linha</div>
+          <div class="tag">FCLM</div>
+        </div>
+        <div class="desc">No Activity Details, vai pra última página e pega a última linha de STOW (dst=), com hora e copiar.</div>
+        <div class="meta">
+          <span class="pill">activityDetails</span>
+          <span class="pill">Rápido</span>
+        </div>
+        <div class="actions">
+          <a class="dl" href="scripts/fclm-activitydetails-ultimo-stow.user.js" download>⬇ Baixar .user.js</a>
+          <a class="demo" href="#demos">🖼 Ver prints</a>
+        </div>
+      </div>
+
+      <div class="card" data-tags="PPA,FCLM">
+        <div class="k">
+          <div class="name">PPA — FIX Total filtrado + %Total</div>
+          <div class="tag">PPA</div>
+        </div>
+        <div class="desc">Tabs Pick Mod/PIT/Todos, recalcula linha Total conforme filtro e adiciona %Inf/Total e %Dir/Total no Total.</div>
+        <div class="meta">
+          <span class="pill">inspect/process</span>
+          <span class="pill">UI + Totais</span>
+        </div>
+        <div class="actions">
+          <a class="dl" href="scripts/fclm-ppa-fix-total-percent.user.js" download>⬇ Baixar .user.js</a>
+          <a class="demo" href="#demos">🎞 Ver demo</a>
+        </div>
+      </div>
+
+      <!-- PPR -->
+      <div class="card" data-tags="PPR,FCLM">
+        <div class="k">
+          <div class="name">PPR — Toggles + UI compacta</div>
+          <div class="tag">PPR</div>
+        </div>
+        <div class="desc">Toggles de processos por área + destaque de %ToPlan com UI mais compacta e rápida.</div>
+        <div class="meta">
+          <span class="pill">processPathRollup</span>
+          <span class="pill">jQuery</span>
+        </div>
+        <div class="actions">
+          <a class="dl" href="scripts/ppr-toggles.user.js" download>⬇ Baixar .user.js</a>
+          <a class="demo" href="#demos">🖼 Ver prints</a>
+        </div>
+      </div>
+
+      <!-- ATLAS -->
+      <div class="card" data-tags="ATLAS">
+        <div class="k">
+          <div class="name">ATLAS — Totais DPMO (painel)</div>
+          <div class="tag">ATLAS</div>
+        </div>
+        <div class="desc">Extrai e exibe Totais (Stow/Receive/Total) de DPMO usando célula “DPMO” (mais confiável).</div>
+        <div class="meta">
+          <span class="pill">atlas.qubit.amazon.dev</span>
+          <span class="pill">cache local</span>
+        </div>
+        <div class="actions">
+          <a class="dl" href="scripts/atlas-totais-dpmo.user.js" download>⬇ Baixar .user.js</a>
+          <a class="demo" href="#demos">🎞 Ver demo</a>
+        </div>
+      </div>
+
+      <!-- BMI -->
+      <div class="card" data-tags="BMI">
+        <div class="k">
+          <div class="name">BMI — Total minutes (mm:ss) + UI bonita</div>
+          <div class="tag">BMI</div>
+        </div>
+        <div class="desc">Soma coluna “minutes” e mostra total em hh:mm:ss num painel bonito e compacto.</div>
+        <div class="meta">
+          <span class="pill">bmi.amazon.com</span>
+          <span class="pill">UI</span>
+        </div>
+        <div class="actions">
+          <a class="dl" href="scripts/bmi-total-minutes.user.js" download>⬇ Baixar .user.js</a>
+          <a class="demo" href="#demos">🖼 Ver prints</a>
+        </div>
+      </div>
+
+      <!-- Roster -->
+      <div class="card" data-tags="FCLM">
+        <div class="k">
+          <div class="name">FCLM — Treinamentos reais no Roster + Filtros</div>
+          <div class="tag">FCLM</div>
+        </div>
+        <div class="desc">Adiciona coluna Treinamentos no roster e botões para filtrar AAs por Pick/Receive/Pack/Stow etc.</div>
+        <div class="meta">
+          <span class="pill">employeeRoster</span>
+          <span class="pill">filtros</span>
+        </div>
+        <div class="actions">
+          <a class="dl" href="scripts/fclm-roster-treinamentos.user.js" download>⬇ Baixar .user.js</a>
+          <a class="demo" href="#demos">🎞 Ver demo</a>
+        </div>
+      </div>
+
     </div>
+
+    <section class="panel" id="demos" style="margin-top:14px">
+      <div style="font-weight:950">Demos (prints e vídeos)</div>
+      <p style="color:var(--muted);margin:8px 0 0;font-size:12px">
+        Coloque imagens em <b>assets/img/</b> e vídeos em <b>assets/video/</b>, depois referencie aqui.
+      </p>
+
+      <div style="margin-top:12px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+        <div style="border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:12px;background:rgba(255,255,255,.04)">
+          <b>PPA — Último STOW (exemplo)</b>
+          <div style="color:var(--muted);font-size:12px;margin-top:4px">Suba um print e referencie assim:</div>
+          <code style="display:block;margin-top:8px;color:#dbe7ff;background:rgba(0,0,0,.25);padding:10px;border-radius:12px;overflow:auto">
+&lt;img src="assets/img/ppa-ultimo-stow.png" style="max-width:100%;border-radius:12px"&gt;
+          </code>
+        </div>
+
+        <div style="border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:12px;background:rgba(255,255,255,.04)">
+          <b>Vídeo (exemplo)</b>
+          <div style="color:var(--muted);font-size:12px;margin-top:4px">Suba um mp4 e use:</div>
+          <code style="display:block;margin-top:8px;color:#dbe7ff;background:rgba(0,0,0,.25);padding:10px;border-radius:12px;overflow:auto">
+&lt;video controls style="width:100%;border-radius:12px"&gt;
+  &lt;source src="assets/video/demo.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+          </code>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="faq" style="margin-top:14px">
+      <div style="font-weight:950">FAQ</div>
+      <div style="margin-top:10px;color:var(--muted);font-size:12px;line-height:1.55">
+        <b>1) Como instalar?</b><br/>
+        Instale Tampermonkey → clique em “Baixar .user.js” → confirme “Install” → pronto.<br/><br/>
+
+        <b>2) Como adicionar novos scripts?</b><br/>
+        Suba o arquivo em <b>scripts/</b> e crie um novo card no HTML (copie um card e altere nome/descrição/link).<br/><br/>
+
+        <b>3) Como o botão baixa?</b><br/>
+        O atributo <code>download</code> força download do arquivo no clique. Em alguns browsers ele pode abrir e o Tampermonkey oferecer instalar.
+      </div>
+    </section>
+
+    <footer>Hub de Scripts • feito para padronizar o uso nos turnos</footer>
   </div>
 
   <script>
-    // ==========================
-    // EDITE AQUI: SEUS SCRIPTS
-    // ==========================
-    const SCRIPTS = [
-      {
-        name: "PPA — Último BIN / Último STOW",
-        tag: "PPA",
-        desc: "Mostra o último endereço (dst/bin) e hora do último evento do AA, com painel fixo.",
-        requires: [
-          { label: "Tampermonkey", url: "https://www.tampermonkey.net/" }
-        ],
-        downloads: [
-          { label: "Baixar .user.js", url: "SEU_LINK_DO_ARQUIVO.user.js" },
-          { label: "Changelog (opcional)", url: "SEU_LINK_CHANGELOG" }
-        ],
-        pages: ["fclm-portal.amazon.com"]
-      },
-      {
-        name: "ATLAS — Highlight de DPMO por Meta",
-        tag: "ATLAS",
-        desc: "Pinta linhas conforme meta por processo (ex: Stow 8000, Receive 4000).",
-        requires: [
-          { label: "Tampermonkey", url: "https://www.tampermonkey.net/" }
-        ],
-        downloads: [
-          { label: "Baixar .user.js", url: "SEU_LINK_ATLAS.user.js" }
-        ],
-        pages: ["atlas (URL interna)"]
-      },
-      {
-        name: "PPR — Filtros + Resumo Copiável",
-        tag: "PPR",
-        desc: "Botões rápidos de filtro (turno/dia) e botão copiar resumo para report.",
-        requires: [
-          { label: "Tampermonkey", url: "https://www.tampermonkey.net/" }
-        ],
-        downloads: [
-          { label: "Baixar .user.js", url: "SEU_LINK_PPR.user.js" }
-        ],
-        pages: ["fclm-portal.amazon.com"]
-      },
-      {
-        name: "BMI — Minutes → HH:MM + Resumo",
-        tag: "BMI",
-        desc: "Converte minutos em horas e gera resumo do período.",
-        requires: [
-          { label: "Tampermonkey", url: "https://www.tampermonkey.net/" }
-        ],
-        downloads: [
-          { label: "Baixar .user.js", url: "SEU_LINK_BMI.user.js" }
-        ],
-        pages: ["bmi.amazon.com (exemplo)"]
+    const q = document.getElementById('q');
+    const chips = document.getElementById('chips');
+    const cards = [...document.querySelectorAll('.card')];
+    let activeTag = 'ALL';
+
+    function apply(){
+      const term = (q.value||'').trim().toLowerCase();
+      for(const c of cards){
+        const tags = (c.getAttribute('data-tags')||'').toUpperCase();
+        const hay = (c.innerText||'').toLowerCase();
+
+        const tagOk = activeTag === 'ALL' ? true : tags.split(',').includes(activeTag);
+        const qOk = term ? hay.includes(term) : true;
+
+        c.classList.toggle('hide', !(tagOk && qOk));
       }
-    ];
+    }
 
-    // ==========================
-    // EDITE AQUI: SUAS DEMOS
-    // ==========================
-    const DEMOS = [
-      {
-        title: "Como instalar (vídeo)",
-        type: "video",
-        url: "https://www.youtube.com/embed/dQw4w9WgXcQ", // troque pelo seu
-        caption: "Mostra instalação no Tampermonkey e ativação do script."
-      },
-      {
-        title: "Exemplo — Painel Último STOW (imagem)",
-        type: "image",
-        url: "COLOQUE_A_URL_DA_SUA_IMAGEM.png",
-        caption: "Onde o painel aparece e o que significa cada campo."
+    chips.addEventListener('click', (e)=>{
+      const el = e.target.closest('.chip');
+      if(!el) return;
+      activeTag = el.getAttribute('data-tag') || 'ALL';
+      for(const ch of [...chips.querySelectorAll('.chip')]){
+        const on = (ch.getAttribute('data-tag')||'ALL') === activeTag;
+        ch.classList.toggle('off', !on);
       }
-    ];
+      apply();
+    });
 
-    // ==========================
-    // Render
-    // ==========================
-    const grid = document.getElementById("grid");
-    const search = document.getElementById("search");
-    const filters = document.getElementById("filters");
-    const mediaGrid = document.getElementById("mediaGrid");
-
-    const tags = ["Todos", ...Array.from(new Set(SCRIPTS.map(s => s.tag)))];
-    let activeTag = "Todos";
-
-    function pill(label){
-      const el = document.createElement("div");
-      el.className = "pill" + (label === activeTag ? " active" : "");
-      el.textContent = label;
-      el.onclick = () => {
-        activeTag = label;
-        [...filters.children].forEach(c => c.classList.remove("active"));
-        el.classList.add("active");
-        render();
-      };
-      return el;
-    }
-
-    tags.forEach(t => filters.appendChild(pill(t)));
-
-    function card(s){
-      const el = document.createElement("div");
-      el.className = "card";
-      el.innerHTML = `
-        <div class="cardhead">
-          <div>
-            <div class="title">${escapeHtml(s.name)}</div>
-            <div class="desc">${escapeHtml(s.desc)}</div>
-          </div>
-          <div class="tag">${escapeHtml(s.tag)}</div>
-        </div>
-
-        <div class="meta">
-          ${(s.pages||[]).map(p => `<span>${escapeHtml(p)}</span>`).join("")}
-        </div>
-
-        <div class="hr"></div>
-
-        <div style="font-size:12px;color:var(--muted);">
-          <b>Extensões/Dependências:</b>
-          <div style="margin-top:6px;display:grid;gap:6px;">
-            ${(s.requires||[]).map(r => `
-              <div>• <a class="link" href="${r.url}" target="_blank" rel="noopener">${escapeHtml(r.label)}</a></div>
-            `).join("")}
-          </div>
-        </div>
-
-        <div class="actions">
-          ${(s.downloads||[]).map(d => `
-            <a class="btn btn-primary small" href="${d.url}" target="_blank" rel="noopener">⬇ ${escapeHtml(d.label)}</a>
-          `).join("")}
-          <a class="btn btn-ghost small" href="#demos">🎥 Ver demo</a>
-        </div>
-      `;
-      return el;
-    }
-
-    function mediaCard(m){
-      const el = document.createElement("div");
-      el.className = "media";
-      const frame = m.type === "video"
-        ? `<div class="frame"><iframe src="${m.url}" title="${escapeHtml(m.title)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>`
-        : `<div class="frame"><img src="${m.url}" alt="${escapeHtml(m.title)}" /></div>`;
-
-      el.innerHTML = `
-        <h3>${escapeHtml(m.title)}</h3>
-        ${frame}
-        <div class="caption">${escapeHtml(m.caption || "")}</div>
-      `;
-      return el;
-    }
-
-    function render(){
-      const q = (search.value || "").toLowerCase().trim();
-      grid.innerHTML = "";
-
-      const items = SCRIPTS.filter(s => {
-        const matchesTag = activeTag === "Todos" || s.tag === activeTag;
-        const blob = (s.name + " " + s.tag + " " + s.desc + " " + (s.pages||[]).join(" ")).toLowerCase();
-        const matchesSearch = !q || blob.includes(q);
-        return matchesTag && matchesSearch;
-      });
-
-      if(!items.length){
-        const empty = document.createElement("div");
-        empty.className = "panel";
-        empty.innerHTML = `<b>Nenhum resultado.</b><div style="color:var(--muted);font-size:12px;margin-top:6px;">Tente outra palavra-chave ou filtro.</div>`;
-        grid.appendChild(empty);
-        return;
-      }
-
-      items.forEach(s => grid.appendChild(card(s)));
-    }
-
-    function renderMedia(){
-      mediaGrid.innerHTML = "";
-      DEMOS.forEach(m => mediaGrid.appendChild(mediaCard(m)));
-    }
-
-    function escapeHtml(str){
-      return String(str ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-    }
-
-    search.addEventListener("input", render);
-    render();
-    renderMedia();
+    q.addEventListener('input', apply);
+    apply();
   </script>
 </body>
 </html>
